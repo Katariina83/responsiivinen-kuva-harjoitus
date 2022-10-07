@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #EEE;
+    font: 10px/13px 'Lucida Sans',sans-serif;
+ }
+ /*wrapper pitää sisällään kaikki img-laatat.*/
+ .wrap {
+    overflow: hidden;   /*hidden mahdollistaa floatin asettamisen sisällä oleviin img-laattoihin*/
+    margin: 10px;
+    display: flex;  /*flex yhdessä flex-wrapin kanssa korvaa floatin*/
+    flex-wrap: wrap; 
+ }
+ 
+ .box {  /*box keskustelee img laattojen kanssa*/
+    position: relative;   /*yhdessä position:absolute kanssa (boxInner), saa laatikot pysymään neliömäisinä sisällöstä riippumatta*/
+    width: 20%;   /*width ja padding-bottom määrittävät laatikon koon ja tekevät siitä neliömäisen.*/
+    padding-bottom: 20%;
+    width: 100%;
+    padding-bottom: 100%;
+ }
+ 
+ .boxInner {  /*Määrittelee kunkin img-laatan todellisen sisältöalueen.*/
+    position: absolute;
+    left: 10px; /* 10 pikselillä kunkin reunan ympärille */
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+    overflow: hidden;
+ }
+ 
+ .boxInner img {  
+    width: 100%;  /*jotta kuvat täyttävät koko laatan leveyden, käytetään leveyttä:100% */
+ }
+
+ .boxInner .titleBox {  /*Tämä määritelmä muotoilee otsikon tekstikentän tyylit*/
+    position: absolute;  /*Tekstiruutu menee jokaisen ruudun alareunaan, piilotettuna näkyvistä (margin-bottomin negatiivinen arvo)*/
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: -50px;
+    background: #000;  /*osittain läpinäkyvä tausta ja padding*/
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    padding: 10px;
+    text-align: center;
+    -webkit-transition: all 0.3s ease-out;  /*CSS3-transitionia käytetään tekstiruudun näyttämisessä/piilottamisessa:*/
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+ }
+ 
+ body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
+    margin-bottom: 0;  /*hover-tyylejä käytetään tekstiruudun paljastamiseen. Huom. erilliset tyylit kosketus- ja ei-kosketusympäristöille*/
+ }
+ 
+ /* Media query säännöt Tabletille: 2 pystyriviä*/
+ @media only screen and (min-width : 426px) {
+    /* Tablet view: 2 tiles */
+    .box {
+       width: 50%;
+       padding-bottom: 50%;
+    }
+ }
+ /* Media query säännöt (pieni) Desktop: 3 pystyriviä*/
+ @media only screen and (min-width : 769px) {
+    .box {
+       width: 33.3%;
+       padding-bottom: 33.3%;
+    }
+ }
+/* Media query säännöt (suuri) Desktop: 4 pystyriviä*/
+ @media only screen and (min-width : 1051px) {
+    /* Medium desktop: 4 tiles */
+    .box {
+       width: 25%;
+       padding-bottom: 25%;
+    }
+ }
